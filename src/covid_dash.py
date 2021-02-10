@@ -7,12 +7,8 @@ from plotly.subplots import make_subplots
 import pandas as pd
 import requests
 from datetime import datetime
-#https://towardsdatascience.com/building-a-real-time-dashboard-us
-ing-python-plotly-library-and-web-service-145f50d204f0
-raw=
-requests.get("https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgi
-s/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query
-?where=1%3D1&outFields=*&outSR=4326&f=json")
+#https://towardsdatascience.com/building-a-real-time-dashboard-using-python-plotly-library-and-web-service-145f50d204f0
+raw=requests.get("https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json")
 raw_json = raw.json()
 df = pd.DataFrame(raw_json["features"])
 data_list = df["attributes"].tolist()
@@ -28,8 +24,7 @@ def convertTime(t):
 df_final = df_final.dropna(subset=["Last_Update"])
 df_final["Province_State"].fillna(value="", inplace=True)
 df_final["Last_Update"]= df_final["Last_Update"]/1000
-df_final["Last_Update"] =
-df_final["Last_Update"].apply(convertTime)
+df_final["Last_Update"] = df_final["Last_Update"].apply(convertTime)
 df_total = df_final.groupby("Country_Region",
 as_index=False).agg(
  {
@@ -66,13 +61,10 @@ None, None, {"type": "indicator"}, {"type": "indicator"},
 "colspan":3}, None, None],
  ]
 )
-message = df_final["Country_Region"] + " " +
-df_final["Province_State"] + "<br>"
-message += "Confirmed: " + df_final["Confirmed"].astype(str) +
-"<br>"
+message = df_final["Country_Region"] + " " +df_final["Province_State"] + "<br>"
+message += "Confirmed: " + df_final["Confirmed"].astype(str) +"<br>"
 message += "Deaths: " + df_final["Deaths"].astype(str) + "<br>"
-message += "Recovered: " + df_final["Recovered"].astype(str) +
-"<br>"
+message += "Recovered: " + df_final["Recovered"].astype(str) +"<br>"
 message += "Last updated: " + df_final["Last_Update"].astype(str)
 df_final["text"] = message
 fig.add_trace(
@@ -178,7 +170,7 @@ str(df_final["Last_Update"][0]) + ")",
  y=0)
  ]
 )
-fig.write_html('templates/dashboard.html')
+fig.write_html('templates\dashboard.html')
 
 
 
