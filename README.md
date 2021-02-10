@@ -1,6 +1,6 @@
 # Covid map flask server
 
-In contribution with my partners Estela and Kapil, there is a server that show you in real time the Covid worldwide map with the actual features:
+In contribution with my partners <b>Estela</b> and <b>Kapil</b>, there is a server that show you in real time the Covid worldwide map with the actual features:
 - Total cases per region of countries.
 - Total recovers.
 - Total deaths.
